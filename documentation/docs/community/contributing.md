@@ -251,7 +251,7 @@ Contributors are recognized in:
 
 - 💬 [Discord](https://discord.gg/jobel) — Real-time help
 - 🐛 [GitHub Issues](https://github.com/jobel-ai/jobel-ai.github.io/issues) — Bug reports
-- 📚 [Documentation](/docs/intro) — Guides and reference
+- 📚 [Documentation](/docs/) — Guides and reference
 
 ---
 

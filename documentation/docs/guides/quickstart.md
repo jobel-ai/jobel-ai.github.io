@@ -228,6 +228,6 @@ docker-compose logs backend
 
 ## Get Help
 
-- 📚 [Full Documentation](/docs/intro)
+- 📚 [Full Documentation](/docs/)
 - 💬 [Discord Community](https://discord.gg/jobel)
 - 🐛 [GitHub Issues](https://github.com/jobel-ai/jobel-ai.github.io/issues)

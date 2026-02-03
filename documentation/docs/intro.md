@@ -109,7 +109,7 @@ Upload any API documentation to teach Jobel new providers:
 
 ## 💬 Need Help?
 
-- 📚 Browse our [full documentation](/docs/intro)
+- 📚 Browse our [full documentation](/docs/)
 - 💬 Join our [Discord community](https://discord.gg/jobel)
 - 🐛 Report issues on [GitHub](https://github.com/jobel-ai/jobel-ai.github.io/issues)
 - 🐦 Follow us on [Twitter](https://twitter.com/JobelAI)

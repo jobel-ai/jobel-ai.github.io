@@ -128,7 +128,7 @@ PRs welcome! See [Contributing](/docs/community/contributing).
 
 ## Stay Updated
 
-- 📝 [Blog](/blog) — Release announcements
+- 📝 [GitHub Releases](https://github.com/jobel-ai/jobel-ai.github.io/releases) — Release announcements
 - 🐦 [Twitter](https://twitter.com/JobelAI) — Quick updates
 - 💬 [Discord](https://discord.gg/jobel) — Community discussion
 - ⭐ [GitHub](https://github.com/jobel-ai/jobel-ai.github.io) — Watch for releases
