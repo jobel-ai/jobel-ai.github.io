@@ -1,363 +1,233 @@
 /**
- * Jobel Documentation - Custom Styles
- * Enterprise-grade dark theme with premium aesthetics
+ * Jobel Documentation - Enterprise Design System
+ * Inspired by Cursor, Replit, and YC Grade Design
+ * Minimalist, High-Contrast, Developer-First
  */
 
 :root {
-    /* Primary Colors - Vibrant Purple/Indigo */
-    --ifm-color-primary: #6366f1;
-    --ifm-color-primary-dark: #4f46e5;
-    --ifm-color-primary-darker: #4338ca;
-    --ifm-color-primary-darkest: #3730a3;
-    --ifm-color-primary-light: #818cf8;
-    --ifm-color-primary-lighter: #a5b4fc;
-    --ifm-color-primary-lightest: #c7d2fe;
+    /* High-Contrast Palette */
+    --ifm-color-primary: #ffffff;
+    --ifm-color-primary-dark: #e5e5e5;
+    --ifm-color-primary-darker: #d4d4d4;
+    --ifm-color-primary-darkest: #a3a3a3;
+    --ifm-color-primary-light: #ffffff;
+    --ifm-color-primary-lighter: #ffffff;
+    --ifm-color-primary-lightest: #ffffff;
 
-    /* Secondary Colors - Cyan Accent */
-    --jobel-accent: #06b6d4;
-    --jobel-accent-light: #22d3ee;
-    --jobel-accent-dark: #0891b2;
-
-    /* Gradients */
-    --jobel-gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-    --jobel-gradient-hero: linear-gradient(180deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.05) 100%);
-    --jobel-gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+    /* Accents */
+    --jobel-accent: #00ff88;
+    /* Electric Lime - Hacker/Pro feel */
+    --jobel-accent-blue: #3b82f6;
+    --jobel-border: rgba(255, 255, 255, 0.08);
+    --jobel-border-bright: rgba(255, 255, 255, 0.15);
 
     /* Typography */
     --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --ifm-heading-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', Monaco, Consolas, monospace;
 
-    /* Spacing */
-    --ifm-spacing-horizontal: 1.5rem;
-    --ifm-navbar-height: 4rem;
+    /* Layout Defaults */
+    --ifm-navbar-height: 3.5rem;
+    --ifm-spacing-horizontal: 2rem;
 }
 
-/* Dark Theme Overrides */
+/* Dark Theme Only - Enterprise Choice */
 [data-theme='dark'] {
-    --ifm-background-color: #0a0a0f;
-    --ifm-background-surface-color: #12121a;
-    --ifm-navbar-background-color: rgba(10, 10, 15, 0.85);
-    --ifm-footer-background-color: #080810;
-    --ifm-toc-border-color: rgba(255, 255, 255, 0.1);
-    --ifm-color-emphasis-300: rgba(255, 255, 255, 0.3);
+    --ifm-background-color: #050505;
+    --ifm-background-surface-color: #0f0f0f;
+    --ifm-navbar-background-color: rgba(5, 5, 5, 0.8);
+    --ifm-footer-background-color: #050505;
 
-    /* Code blocks */
-    --prism-background-color: #1a1a2e;
+    --ifm-color-content: #a1a1aa;
+    --ifm-heading-color: #ffffff;
+
+    /* Brand Accent Glow */
+    --jobel-glow: 0 0 30px rgba(0, 255, 136, 0.1);
 }
 
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ============================================
-   NAVBAR STYLING
+   GLOBAL STYLES & PATTERNS
+   ============================================ */
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Sophisticated Grid Background */
+.main-wrapper::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ============================================
+   NAVBAR & NAVIGATION
    ============================================ */
 
 .navbar {
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--jobel-border);
+    padding: 0 2rem;
+}
+
+.navbar__brand {
+    transition: opacity 0.2s ease;
+}
+
+.navbar__brand:hover {
+    opacity: 0.8;
 }
 
 .navbar__title {
     font-weight: 700;
-    font-size: 1.25rem;
-    background: var(--jobel-gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    letter-spacing: -0.02em;
+    color: #fff !important;
 }
 
-.navbar__link {
+.navbar__item {
+    font-size: 0.9rem;
     font-weight: 500;
-    transition: color 0.2s ease;
+    color: #a1a1aa !important;
 }
 
-.navbar__link:hover {
-    color: var(--ifm-color-primary-light);
-}
-
-/* ============================================
-   HERO SECTION ENHANCEMENTS
-   ============================================ */
-
-.hero {
-    background: var(--jobel-gradient-hero);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.hero__title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero__subtitle {
-    font-size: 1.35rem;
-    font-weight: 400;
-    opacity: 0.85;
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    line-height: 1.6;
+.navbar__item:hover,
+.navbar__link--active {
+    color: #fff !important;
 }
 
 /* ============================================
-   BUTTON STYLING
-   ============================================ */
-
-.button {
-    font-weight: 600;
-    padding: 0.75rem 1.75rem;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    text-transform: none;
-}
-
-.button--primary {
-    background: var(--jobel-gradient-primary);
-    border: none;
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-}
-
-.button--primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
-}
-
-.button--secondary {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #ffffff;
-}
-
-.button--secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.25);
-    color: #ffffff;
-}
-
-/* ============================================
-   FEATURE CARDS
-   ============================================ */
-
-.feature-card {
-    background: var(--jobel-gradient-card);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.feature-card:hover {
-    border-color: rgba(99, 102, 241, 0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.feature-card__icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.feature-card__title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    color: #ffffff;
-}
-
-.feature-card__description {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    opacity: 0.8;
-}
-
-/* ============================================
-   DOCUMENTATION PAGES
+   MARKDOWN & CONTENT
    ============================================ */
 
 .markdown h1 {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 2rem;
+    color: #fff;
 }
 
 .markdown h2 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-top: 3rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.markdown h3 {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-top: 2rem;
+    letter-spacing: -0.02em;
+    margin-top: 3.5rem;
+    border: none;
+    color: #f4f4f5;
 }
 
-/* Code Block Enhancements */
-.prism-code {
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+.markdown p {
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
 }
 
-code {
-    background: rgba(99, 102, 241, 0.15);
-    color: var(--ifm-color-primary-light);
-    padding: 0.2rem 0.4rem;
-    border-radius: 6px;
-    font-size: 0.9em;
+/* Clean Sidebar */
+.theme-doc-sidebar-menu {
+    padding: 2rem 1rem !important;
 }
-
-/* Admonitions / Callouts */
-.alert {
-    border-radius: 12px;
-    border-left-width: 4px;
-}
-
-.alert--info {
-    --ifm-alert-background-color: rgba(99, 102, 241, 0.1);
-    --ifm-alert-border-color: var(--ifm-color-primary);
-}
-
-/* ============================================
-   FOOTER STYLING
-   ============================================ */
-
-.footer {
-    background: linear-gradient(180deg, var(--ifm-footer-background-color) 0%, #050508 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer__title {
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ifm-color-primary-light);
-}
-
-.footer__link-item {
-    transition: color 0.2s ease;
-}
-
-.footer__link-item:hover {
-    color: var(--ifm-color-primary-light);
-}
-
-.footer__copyright {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    opacity: 0.6;
-}
-
-/* ============================================
-   ANNOUNCEMENT BAR
-   ============================================ */
-
-.announcementBar_node_modules-\@docusaurus-theme-classic-lib-theme-AnnouncementBar-styles-module {
-    background: var(--jobel-gradient-primary);
-    font-weight: 500;
-}
-
-/* ============================================
-   SIDEBAR STYLING
-   ============================================ */
 
 .menu__link {
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    margin: 2px 0;
+    color: #71717a !important;
+}
+
+.menu__link:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #fff !important;
 }
 
 .menu__link--active {
-    background: rgba(99, 102, 241, 0.15);
-    color: var(--ifm-color-primary-light);
-}
-
-.menu__list-item-collapsible:hover {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #fff !important;
+    font-weight: 600;
 }
 
 /* ============================================
-   ANIMATIONS
+   COMPONENTS
    ============================================ */
 
-@keyframes float {
-
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
+/* Code Blocks - Pro Style */
+.prism-code {
+    background-color: #0c0c0c !important;
+    border: 1px solid var(--jobel-border) !important;
+    padding: 1.25rem !important;
+    font-size: 0.9rem !important;
 }
 
-@keyframes pulse-glow {
-
-    0%,
-    100% {
-        box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
-    }
-
-    50% {
-        box-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
-    }
+code {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e4e4e7;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
 }
 
-.animate-float {
-    animation: float 3s ease-in-out infinite;
+/* Callouts - Minimalist */
+.alert {
+    background: #0f0f0f;
+    border: 1px solid var(--jobel-border);
+    border-left: 2px solid var(--ifm-color-primary);
+    border-radius: 8px;
+    color: #d4d4d8;
 }
 
-.animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+/* Buttons */
+.button {
+    border-radius: 6px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button--primary {
+    background: #fff;
+    color: #000;
+    border: 1px solid #fff;
+}
+
+.button--primary:hover {
+    background: #e5e5e5;
+    color: #000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+}
+
+.button--secondary {
+    background: transparent;
+    border: 1px solid var(--jobel-border-bright);
+    color: #fff;
+}
+
+.button--secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #fff;
+    color: #fff;
 }
 
 /* ============================================
-   RESPONSIVE DESIGN
+   UTILITIES
    ============================================ */
 
-@media (max-width: 996px) {
-    .hero__title {
-        font-size: 2.5rem;
-    }
-
-    .hero__subtitle {
-        font-size: 1.1rem;
-    }
+.highlight {
+    color: var(--jobel-accent);
 }
 
-@media (max-width: 576px) {
-    .hero__title {
-        font-size: 2rem;
-    }
-
-    .feature-card {
-        padding: 1.5rem;
-    }
+.text--muted {
+    color: #71717a;
 }
