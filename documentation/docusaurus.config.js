@@ -39,14 +39,7 @@ const config = {
                     sidebarPath: './sidebars.js',
                     editUrl: 'https://github.com/jobel-ai/jobel-ai.github.io/tree/main/documentation/',
                 },
-                blog: {
-                    showReadingTime: true,
-                    feedOptions: {
-                        type: ['rss', 'atom'],
-                        xslt: true,
-                    },
-                    editUrl: 'https://github.com/jobel-ai/jobel-ai.github.io/tree/main/documentation/',
-                },
+                blog: false, // Disabled until we have blog content
                 theme: {
                     customCss: './src/css/custom.css',
                 },
@@ -83,7 +76,7 @@ const config = {
                         label: 'Documentation',
                     },
                     { to: '/docs/api/overview', label: 'API', position: 'left' },
-                    { to: '/blog', label: 'Blog', position: 'left' },
+                    // { to: '/blog', label: 'Blog', position: 'left' }, // Disabled
                     {
                         href: 'https://github.com/jobel-ai/jobel-ai.github.io',
                         label: 'GitHub',
@@ -98,7 +91,7 @@ const config = {
                     {
                         title: 'Learn',
                         items: [
-                            { label: 'Getting Started', to: '/docs/intro' },
+                            { label: 'Getting Started', to: '/docs/' },
                             { label: 'Architecture', to: '/docs/architecture/overview' },
                             { label: 'API Reference', to: '/docs/api/overview' },
                         ],
@@ -114,7 +107,7 @@ const config = {
                     {
                         title: 'More',
                         items: [
-                            { label: 'Blog', to: '/blog' },
+                            // { label: 'Blog', to: '/blog' }, // Disabled
                             { label: 'GitHub', href: 'https://github.com/jobel-ai/jobel-ai.github.io' },
                             { label: 'Roadmap', to: '/docs/community/roadmap' },
                         ],
