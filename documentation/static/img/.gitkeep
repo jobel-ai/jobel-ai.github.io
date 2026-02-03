@@ -1,0 +1,10 @@
+# Static Images
+
+Place your images here:
+- logo.svg (site logo)
+- favicon.ico (browser icon)
+- social-card.png (1200x630 for social sharing)
+- architecture diagrams
+- screenshots
+
+These will be served from /img/ in the built site.
