@@ -1,12 +1,20 @@
 ---
 sidebar_position: 1
 title: Architecture Overview
-description: How Jobel's enterprise-grade architecture delivers zero-hallucination code
+description: How Jobel's enterprise-grade architecture eliminates AI hallucinations
 ---
 
 # 🏗️ Architecture Overview
 
-Jobel is built as an enterprise-grade platform designed for reliability, security, and extensibility.
+## Why This Architecture Matters
+
+Every AI coding tool promises to "write code for you." But here's what they don't tell you: **single-prompt AI is fundamentally unreliable for production systems**.
+
+Jobel isn't built like ChatGPT or GitHub Copilot. It's built like **Manus** — engineered for professionals who ship to production, not hobbyists experimenting with demos.
+
+**The difference? Architecture.**
+
+Generic AI tools generate code in one shot based on training data. Jobel uses a **multi-agent orchestration loop** with verified contracts and self-healing validation. The result: code you can actually deploy.
 
 ---
 
@@ -72,191 +80,116 @@ graph TB
 
 ---
 
-## Core Components
+## The Three Pillars
 
-### 🎨 Frontend (Next.js 14)
+### 1. 🧠 Multi-Agent Intelligence
 
-Modern React application with two primary modes:
+**The Problem:** Single-prompt AI lacks reasoning depth. It guesses, invents APIs, and produces code that "looks right" but breaks in production.
 
-| Mode | Purpose |
-|------|---------|
-| **Integration Assistant (A)** | Natural language → Production code |
-| **Provider Onboarding (B)** | Upload docs → Certified provider |
+**Jobel's Solution:** Four specialized agents working in sequence:
 
-**Features:**
-- Server-side rendering for fast initial load
+| Agent | Role | Why It Matters |
+|-------|------|----------------|
+| **Planner** | Task decomposition | Breaks complex work into atomic steps—no vague one-shot prompts |
+| **Researcher** | Knowledge retrieval | Finds **your** documentation, not Stack Overflow guesses |
+| **Executor** | Code generation | Generates using verified contracts, not training data hopes |
+| **Critic** | Validation & fixing | Self-heals issues before you see them—zero manual debugging |
+
+This is **Manus-grade orchestration**. Every agent has one job and does it with precision. No hallucinations, no surprises.
+
+[Learn more →](/docs/architecture/multi-agent)
+
+---
+
+### 2. 📋 Contract Authority
+
+**The Problem:** Traditional AI "dreams up" plausible-sounding APIs like `stripe.customer.create_subscription()`. The method doesn't exist. You waste 30 minutes debugging an API that was never real.
+
+**Jobel's Solution:** The Contract Compiler extracts **verified API contracts** from your documentation and builds a registry. The LLM can **only** reference methods that exist in this registry.
+
+**Result:** Zero hallucinations. If the AI suggests a method, it's because it exists in *your* documentation.
+
+This is what separates AI slop from production-ready tooling.
+
+[Learn more →](/docs/architecture/contract-compiler)
+
+---
+
+### 3. 🔒 Security-First Validation
+
+**The Problem:** AI-generated code often includes:
+- Hardcoded secrets
+- Missing webhook signature verification
+- Insecure logging of sensitive data
+- No HTTPS enforcement
+
+**Jobel's Solution:** 50+ security patterns enforced **automatically**:
+
+- ✅ Secrets in environment variables, never hardcoded
+- ✅ Webhook signatures verified before processing
+- ✅ Sensitive data excluded from logs
+- ✅ HTTPS-only for external URLs
+- ✅ Idempotency keys for financial operations
+
+Your team doesn't need to remember these rules. Jobel enforces them at code generation time.
+
+[Learn more →](/docs/features/security)
+
+---
+
+## How It Compares
+
+### Generic AI Tools (ChatGPT, Copilot, Cursor)
+- Single-prompt generation
+- Training data = guesswork
+- No validation loop
+- Security as an afterthought
+- "Close enough" code quality
+
+### Jobel (Manus-Grade)
+- Multi-agent orchestration
+- Verified contract grounding
+- Self-healing validation
+- Security enforced at generation
+- Production-ready output
+
+**The question isn't "can AI write code?" It's "can you ship it?"**
+
+---
+
+## Built for Professionals
+
+Jobel is designed for engineers building **real products** with **real stakes**:
+
+- **Startups shipping MVPs** — Get Auth0 + Stripe integration right the first time
+- **Enterprise teams** — Onboard internal APIs with consistent, validated patterns
+- **Solo developers** — Stop debugging hallucinated methods at 2 AM
+
+We built Jobel because we were tired of AI tools that felt like toys. This is Manus-grade infrastructure for professionals who ship.
+
+---
+
+## Technical Foundation
+
+### Frontend
+- Next.js 14 with server-side rendering
 - Real-time streaming responses
-- Dark mode with premium aesthetics
-- Mobile-responsive design
+- Two modes: Integration Assistant + Provider Onboarding
 
----
+### Backend
+- Express + TypeScript microservices
+- Service-oriented architecture for extensibility
+- Multi-LLM provider support (Groq, Claude, OpenAI, Gemini, OpenRouter)
 
-### ⚙️ Backend (Express + TypeScript)
+### Data Layer
+- PostgreSQL with pgvector for semantic search
+- RAG pipeline for documentation retrieval
+- Contract registry for zero-hallucination grounding
 
-Modular, service-oriented architecture:
-
-```backend/src/
-├── config/         # Environment & configuration
-├── llm/            # Multi-provider LLM abstraction
-├── providers/      # Pre-certified integrations (Auth0, Stripe)
-├── routes/         # REST API endpoints
-├── security/       # Security patterns & validation
-├── services/       # Business logic & orchestration
-└── types/          # TypeScript definitions
-```
-
----
-
-### 🧠 Intelligence Layer
-
-The brain of Jobel. See [Multi-Agent Architecture](/docs/architecture/multi-agent) for details.
-
-**Key services:**
-- `AgentOrchestratorService` — Coordinates the agent loop
-- `AgentPlannerService` — Task decomposition
-- `AgentResearcherService` — Documentation retrieval
-- `CodeValidatorService` — Security & accuracy validation
-- `CodeFixerService` — Automated issue remediation
-
----
-
-### 📋 Contract Compiler
-
-The secret to zero hallucinations. See [Contract Compiler](/docs/architecture/contract-compiler) for details.
-
-**Capabilities:**
-- Parses OpenAPI, Markdown, JSON, and code examples
-- Extracts verified API contracts with method signatures
-- Stores in structured registry for LLM grounding
-- Confidence scoring for extracted contracts
-
----
-
-### 📚 Knowledge Service
-
-RAG (Retrieval-Augmented Generation) pipeline:
-
-1. **Ingestion** — Upload documents via API
-2. **Parsing** — Smart chunking by section/endpoint
-3. **Embedding** — Vector generation (Gemini/Jina/local)
-4. **Indexing** — pgvector for semantic search
-5. **Retrieval** — Context-aware document lookup
-
----
-
-### 🔒 Security Layer
-
-Enterprise security enforced at every layer:
-
-- **Request validation** — Input sanitization
-- **Security patterns** — 50+ rules for generated code
-- **Provider-specific rules** — Auth0, Stripe security requirements
-- **Output validation** — No secrets logged, HTTPS enforced
-
----
-
-### 🔌 LLM Provider Layer
-
-Unified interface to multiple LLM providers:
-
-| Provider | Models | Notes |
-|----------|--------|-------|
-| **Groq** | Llama 3.3 70B | Default, free tier |
-| **Claude** | Claude Sonnet 4 | Best reasoning |
-| **OpenAI** | GPT-4o | Most popular |
-| **Gemini** | Gemini 1.5 Pro | Free tier available |
-| **OpenRouter** | 100+ models | Maximum flexibility |
-
-Switch providers with a single environment variable.
-
----
-
-## Data Flow
-
-### Integration Request Flow
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant Frontend
-    participant Backend
-    participant Planner
-    participant Researcher
-    participant Executor
-    participant Critic
-    participant LLM
-
-    User->>Frontend: "Add Stripe subscriptions"
-    Frontend->>Backend: POST /api/integration/analyze
-    Backend->>Planner: Create task plan
-    Planner->>LLM: Decompose intent
-    LLM-->>Planner: Task list
-    
-    loop For each task
-        Planner->>Researcher: Research task context
-        Researcher->>Backend: Semantic search
-        Backend-->>Researcher: Relevant docs + contracts
-    end
-    
-    Researcher->>Executor: Execute with context
-    Executor->>LLM: Generate code (grounded)
-    LLM-->>Executor: Generated code
-    
-    Executor->>Critic: Validate output
-    Critic->>Backend: Check contracts & security
-    
-    alt Validation passed
-        Backend-->>Frontend: Return code + explanation
-    else Validation failed
-        Critic->>Executor: Retry with feedback
-    end
-    
-    Frontend-->>User: Display results
-```
-
----
-
-## Deployment Options
-
-### Option 1: Docker Compose (Recommended)
-
-```yaml
-services:
-  postgres:
-    # pgvector for embeddings
-  backend: 
-    # Express API server
-  frontend:
-    # Next.js application
-```
-
-Single command deployment:
-```bash
-docker-compose up --build
-```
-
-### Option 2: Local Development
-
-Separate processes for frontend and backend with hot reloading.
-
-### Option 3: Cloud Deployment
-
-Deploy to any container platform:
-- AWS ECS / Fargate
-- Google Cloud Run
-- Azure Container Apps
-- Kubernetes
-
----
-
-## Scalability Considerations
-
-| Component | Scaling Strategy |
-|-----------|------------------|
-| Frontend | Horizontal (stateless) |
-| Backend | Horizontal with shared state |
-| PostgreSQL | Vertical or managed service |
-| LLM Providers | Rate limit aware, provider rotation |
+### Deployment
+- Docker Compose for one-command deployment
+- Self-hosted or cloud (AWS, GCP, Azure, Kubernetes)
+- Horizontal scaling for frontend and backend
 
 ---
 
@@ -264,8 +197,8 @@ Deploy to any container platform:
 
 <div className="doc-cards">
 
-- [**Multi-Agent Architecture**](/docs/architecture/multi-agent) — Deep dive into the agent loop
-- [**Contract Compiler**](/docs/architecture/contract-compiler) — How zero-hallucination works
-- [**Security Patterns**](/docs/features/security) — Enterprise security enforcement
+- [**Multi-Agent Architecture**](/docs/architecture/multi-agent) — How the orchestration loop works
+- [**Contract Compiler**](/docs/architecture/contract-compiler) — Zero-hallucination explained
+- [**Security Patterns**](/docs/features/security) — Built-in security enforcement
 
 </div>

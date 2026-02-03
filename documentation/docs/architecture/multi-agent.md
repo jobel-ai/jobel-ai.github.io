@@ -1,27 +1,32 @@
 ---
 sidebar_position: 2
 title: Multi-Agent Architecture
-description: How four specialized AI agents collaborate to deliver perfect code
+description: Why four agents beat one prompt, every time
 ---
 
 # 🤖 Multi-Agent Architecture
 
-Jobel uses a **Manus-style agentic architecture** where four specialized AI agents collaborate in iterative loops to produce accurate, secure code.
+## The Single-Prompt Problem
+
+Ask ChatGPT to "build a Stripe subscription system," and here's what happens:
+
+1. It receives one massive context dump
+2. It guesses at API methods based on training data
+3. It generates code in one shot
+4. There's no validation, no self-correction
+5. You debug hallucinated APIs for 30 minutes
+
+**This isn't a tool problem. It's an architecture problem.**
+
+Single-prompt AI fundamentally cannot handle complex, multi-step work with the reliability needed for production systems. It's AI slop—fast, cheap, and wrong.
+
+Jobel is built differently.
 
 ---
 
-## Why Multi-Agent?
+## Why Four Agents,Not One Prompt
 
-Single-prompt AI fails for complex tasks because:
-- **Context is lost** — Large requests exceed context windows
-- **No self-correction** — Mistakes propagate to final output
-- **No specialization** — One prompt tries to do everything
-
-Jobel solves this with **specialized agents** that focus on what they do best.
-
----
-
-## The Agent Loop
+Jobel uses a **multi-agent orchestration loop** inspired by Manus: four specialized agents working in sequence, each focused on one job.
 
 ```mermaid
 flowchart LR
@@ -54,261 +59,156 @@ flowchart LR
     Critic -.validate.-> Contracts
 ```
 
-### Agent Responsibilities
-
-| Agent | Icon | Purpose | Key Actions |
-|-------|------|---------|-------------|
-| **Planner** | 🎯 | Decomposes intent into tasks | Break down, prioritize, identify dependencies |
-| **Researcher** | 🔍 | Gathers knowledge context | Semantic search, contract lookup |
-| **Executor** | ⚡ | Generates code | Use contracts, apply security patterns |
-| **Critic** | 🔬 | Validates and refines | Check accuracy, security, completeness |
+**The architecture is the intelligence.**
 
 ---
 
-## Phase 1: Planning 🎯
+## The Four Agents
 
-The Planner agent receives the user's natural language request and decomposes it into executable tasks.
+### 🎯 Planner: Task Decomposition
 
-**Input:**
-> "Add Stripe subscriptions with monthly and yearly billing, including webhook handling"
+**What it does:**  
+Breaks down complex requests into atomic, executable tasks with clear dependencies.
 
-**Planner Output:**
-```json
-{
-  "goal": "Implement Stripe subscription system",
-  "reasoning": "Complex integration requiring multiple Stripe APIs",
-  "estimatedComplexity": "complex",
-  "tasks": [
-    {
-      "id": 1,
-      "type": "research",
-      "query": "Stripe subscription creation API",
-      "description": "Research how to create subscriptions with prices"
-    },
-    {
-      "id": 2,
-      "type": "research", 
-      "query": "Stripe webhook handling",
-      "description": "Research webhook signature verification"
-    },
-    {
-      "id": 3,
-      "type": "execute",
-      "description": "Generate subscription creation endpoint",
-      "dependencies": [1]
-    },
-    {
-      "id": 4,
-      "type": "execute",
-      "description": "Generate webhook handler",
-      "dependencies": [2]
-    }
-  ]
-}
-```
+**Why it matters:**  
+No more vague one-shot prompts. The Planner ensures every step is clear, prioritized, and parallelizable where possible.
 
-**Key Intelligence:**
-- Identifies task dependencies (webhooks need research first)
-- Estimates complexity for resource allocation
-- Creates parallelizable research tasks
+**Example:**  
+User request: *"Add Stripe subscriptions with monthly and yearly billing, including webhook handling"*
+
+Planner output:
+1. Research subscription creation API
+2. Research webhook signature verification
+3. Generate subscription endpoint (depends on step 1)
+4. Generate webhook handler (depends on step 2)
+
+Without decomposition, a single prompt would try to tackle everything at once—and likely hallucinate methods or miss security requirements.
 
 ---
 
-## Phase 2: Research 🔍
+### 🔍 Researcher: Knowledge Retrieval
 
-The Researcher agent performs semantic search across the knowledge base and contract registry.
+**What it does:**  
+Performs semantic search across **your** documentation and the contract registry to find relevant context.
 
-**For each research task:**
-1. **Query Expansion** — Generate semantic variants
-2. **Document Search** — pgvector similarity search  
-3. **Contract Lookup** — Find verified API contracts
-4. **Finding Synthesis** — Summarize relevant information
+**Why it matters:**  
+Generic AI relies on training data—Stack Overflow answers from 2019. Jobel's Researcher finds **your current documentation** and verified contracts.
 
-**Research Output:**
-```json
-{
-  "taskId": 1,
-  "query": "Stripe subscription creation API",
-  "findings": [
-    {
-      "source": "stripe.provider.ts",
-      "content": "Create subscription with stripe.subscriptions.create()",
-      "relevanceScore": 0.95
-    },
-    {
-      "source": "Stripe API Contract",
-      "content": "Required: customer, items[].price, payment_behavior",
-      "relevanceScore": 0.92
-    }
-  ],
-  "summary": "Use stripe.subscriptions.create() with customer ID and price items",
-  "confidence": 0.93
-}
-```
+**How it works:**
+- Converts research queries into vector embeddings
+- Searches pgvector for semantically similar documentation chunks
+- Looks up exact API contracts from the Contract Registry
+- Synthesizes findings with confidence scores
 
-**Key Intelligence:**
-- Cross-references multiple sources
-- Calculates confidence scores
-- Identifies prerequisites
+**The result:**  
+The Executor gets grounded, accurate context—not guesses from a 2-year-old training dataset.
 
 ---
 
-## Phase 3: Execution ⚡
+### ⚡ Executor: Grounded Code Generation
 
-The Executor agent generates code using:
-1. **Research Findings** — Context from Researcher
-2. **API Contracts** — Verified method signatures
-3. **Security Patterns** — Provider-specific rules
-4. **Persona Context** — ENGINEER, ARCHITECT, etc.
+**What it does:**  
+Generates code using **verified contracts** and enforced security patterns.
 
-**Executor Prompt Context:**
-```typescript
-interface ExecutorPromptContext {
-  userQuery: string;
-  taskPlan: TaskPlan;
-  researchNotes: ResearchNote[];
-  persona: string;
-  previousAttempt?: string;        // If retrying
-  criticFeedback?: string;         // What to fix
-}
-```
+**Why it matters:**  
+This is where Jobel separates from AI slop. The Executor **cannot hallucinate** because it only references methods that exist in the Contract Registry.
 
-**Generated Code:**
-```typescript
-// Subscription creation endpoint (Executor output)
-app.post('/api/subscriptions', authenticate, async (req, res) => {
-  const { customerId, priceId, billingInterval } = req.body;
-  
-  const subscription = await stripe.subscriptions.create({
-    customer: customerId,
-    items: [{ price: priceId }],
-    payment_behavior: 'default_incomplete',
-    payment_settings: {
-      save_default_payment_method: 'on_subscription'
-    },
-    expand: ['latest_invoice.payment_intent']
-  }, {
-    idempotencyKey: `sub_${customerId}_${priceId}_${Date.now()}`
-  });
+**How it works:**
+- Receives research context from the Researcher
+- Pulls verified API contracts (method signatures, parameters, auth requirements)
+- Applies 50+ security patterns automatically
+- Generates production-ready code
 
-  res.json({ subscription });
-});
-```
-
-**Key Intelligence:**
-- Uses exact method signatures from contracts
-- Applies security patterns (idempotency key)
-- Follows provider best practices
+**Example:**  
+Instead of inventing `stripe.customer.create_subscription()`, the Executor uses the verified contract: `stripe.subscriptions.create()` with required parameters `customer`, `items`, and `payment_behavior`.
 
 ---
 
-## Phase 4: Validation 🔬
+### 🔬 Critic: Validation & Self-Healing
 
-The Critic agent validates the generated output against:
+**What it does:**  
+Validates generated code against contracts and security rules. If issues are found, sends feedback to the Executor for regeneration.
 
-### Validation Checks
+**Why it matters:**  
+This is the **self-healing loop** that makes Jobel Manus-grade. Mistakes are caught and fixed **before you see them**.
 
-| Check Type | What It Validates |
-|------------|-------------------|
-| `contract_violation` | Method signatures match API contracts |
-| `missing_auth` | Authentication is properly applied |
-| `hardcoded_credentials` | No secrets in code |
-| `missing_error_handling` | Try/catch for API calls |
-| `missing_import` | Required modules imported |
-| `wrong_signature` | Parameter types correct |
+**Validation checks:**
+- ✅ All API methods exist in the contract registry
+- ✅ Required parameters are present
+- ✅ Security patterns are applied (no hardcoded secrets, webhook verification, etc.)
+- ✅ Code follows best practices
 
-**Validation Result:**
-```json
-{
-  "valid": true,
-  "confidence": 0.91,
-  "strengths": [
-    "Correct subscription creation pattern",
-    "Idempotency key included",
-    "Payment settings configured properly"
-  ],
-  "issues": [],
-  "shouldRetry": false
-}
-```
+If any check fails, the Critic sends targeted feedback:  
+*"Missing webhook signature verification. Add signature check using `stripe.webhooks.constructEvent()`."*
 
-### When Validation Fails
-
-If the Critic finds issues, it triggers a **retry loop**:
-
-```typescript
-if (validation.shouldRetry && iteration < maxIterations) {
-  // Feed feedback back to Executor
-  const fixedOutput = await executor.generate({
-    previousAttempt: currentOutput,
-    criticFeedback: validation.retryInstructions
-  });
-}
-```
-
-**Retry Instructions Example:**
-> "Missing webhook signature verification. Add stripe.webhooks.constructEvent() 
-> with the raw body and signature header. See Stripe security requirements."
+The Executor regenerates with this feedback, and the loop continues until validation passes.
 
 ---
 
-## Configuration
+## Jobel vs Single-Prompt AI
 
-The agent loop is configurable per request:
+| Capability | ChatGPT / Copilot | Jobel |
+|------------|-------------------|-------|
+| **Task Breakdown** | ❌ Single massive prompt | ✅ Decomposed into atomic tasks |
+| **Knowledge Source** | ⚠️ Training data (outdated) | ✅ Your documentation (current) |
+| **API Accuracy** | ❌ Hallucinates methods | ✅ Verified contracts only |
+| **Security Enforcement** | ⚠️ Manual review required | ✅ Automatic pattern application |
+| **Self-Correction** | ❌ No validation loop | ✅ Critic validates + fixes |
+| **Production Readiness** | ⚠️ Demo-quality | ✅ Manus-grade |
 
-```typescript
-const config: AgentConfig = {
-  maxIterations: 3,          // Retry limit
-  maxSearchesPerTask: 3,     // Research depth
-  minConfidenceToPass: 0.75, // Quality threshold
-  maxTotalSearches: 15,      // Total research calls
-  timeoutMs: 60000,          // Request timeout
-  enableDetailedLogging: true
-};
-```
+**The question isn't "can AI write code?" It's "will it work in production?"**
 
 ---
 
-## State Management
+## Real-World Scenarios This Architecture Prevents
 
-The `AgentState` tracks everything across the loop:
+### Scenario 1: The Hallucinated Method
+**Single-prompt AI:**  
+Confidently generates `stripe.customers.add_subscription()`. Method doesn't exist. You debug for 20 minutes.
 
-```typescript
-interface AgentState {
-  // Context
-  requestId: string;
-  userQuery: string;
-  persona: string;
-  
-  // Progress
-  currentPhase: AgentPhase;
-  iteration: number;
-  
-  // Artifacts
-  taskPlan?: TaskPlan;
-  researchNotes: ResearchNote[];
-  validationHistory: ValidationResult[];
-  
-  // Metrics
-  llmCallCount: number;
-  totalTokensUsed: number;
-  searchCount: number;
-  durationMs?: number;
-}
-```
+**Jobel:**  
+Researcher looks up Stripe contracts. Executor uses verified `stripe.subscriptions.create()`. Code works on first run.
 
 ---
 
-## Performance Metrics
+### Scenario 2: Missing Security
+**Single-prompt AI:**  
+Generates webhook handler. Forgets signature verification. Your endpoint is vulnerable to replay attacks.
 
-Typical request performance:
+**Jobel:**  
+Security patterns enforce webhook signature verification. Critic validates before returning code. Endpoint is secure by default.
 
-| Metric | Simple | Moderate | Complex |
-|--------|--------|----------|---------|
-| **Iterations** | 1 | 1-2 | 2-3 |
-| **LLM Calls** | 3-4 | 6-8 | 10-15 |
-| **Research Queries** | 1-2 | 3-5 | 6-10 |
-| **Duration** | 3-5s | 8-15s | 20-40s |
+---
+
+### Scenario 3: Incomplete Integration
+**Single-prompt AI:**  
+Generates subscription creation. Forgets error handling, idempotency keys, and webhook confirmation.
+
+**Jobel:**  
+Planner decomposes into separate tasks: creation, webhooks, error handling. Researcher finds all relevant patterns. Executor generates complete,production-ready system.
+
+---
+
+## Why This Matters for Your Team
+
+### For Startups
+Get integrations right **the first time**. No wasted sprint cycles debugging AI hallucinations.
+
+### For Enterprise
+Consistent, validated patterns across teams. Onboard internal APIs with the same rigor as public ones.
+
+### For Solo Developers
+Stop being the QA team for AI-generated code. Jobel's Critic does validation so you can focus on building.
+
+---
+
+## Built for Professionals Who Ship
+
+Jobel isn't designed for hobbyists experimenting with prompts. It's built for **engineers shipping to production**.
+
+The multi-agent architecture is more complex than a single prompt. That's the point. **Reliability requires rigor.**
+
+If you want fast, cheap AI slop, use ChatGPT. If you want Manus-grade code you can deploy, use Jobel.
 
 ---
 
@@ -316,8 +216,8 @@ Typical request performance:
 
 <div className="doc-cards">
 
-- [**Contract Compiler**](/docs/architecture/contract-compiler) — The zero-hallucination engine
-- [**Security Patterns**](/docs/features/security) — How security is enforced
-- [**LLM Support**](/docs/features/llm-support) — Multi-provider configuration
+- [**Contract Compiler**](/docs/architecture/contract-compiler) — How zero-hallucination works
+- [**Security Patterns**](/docs/features/security) — Automatic security enforcement
+- [**Knowledge Base**](/docs/features/knowledge-base) — RAG pipeline for documentation
 
 </div>
