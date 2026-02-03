@@ -39,11 +39,15 @@ Current AI code generators suffer from a fundamental flaw:
 
 Jobel introduces **Contract Authority**, a revolutionary approach where the AI can *only* reference APIs that are verified in your documentation.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│  Your Documentation   →   Contract Compiler   →   AI Model │
-│  (OpenAPI, Markdown)      (Extract & Verify)     (Grounded)│
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    Docs[📄 Your Documentation<br/>OpenAPI, Markdown] --> Compiler[⚙️ Contract Compiler<br/>Extract & Verify]
+    Compiler --> AI[🧠 AI Model<br/>Grounded Generation]
+    AI --> Code[✅ Verified Code]
+    
+    style Compiler fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style AI fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Code fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
 ```
 
 **How it works:**

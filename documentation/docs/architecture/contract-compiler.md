@@ -14,13 +14,14 @@ The **Contract Compiler** is Jobel's secret weapon for zero-hallucination code g
 
 Traditional AI code generators suffer from a fundamental limitation:
 
-```
-┌─────────────────────────────────────────────────────────┐
-│  User Request  →  LLM (Training Data)  →  Code Output  │
-└─────────────────────────────────────────────────────────┘
-                          ↓
-            "stripe.customer.create_subscription()"
-                    ❌ Method doesn't exist!
+```mermaid
+flowchart LR
+    User[User Request] --> LLM[LLM<br/>Training Data]
+    LLM --> Code[Code Output]
+    Code -.generates.-> Bad[❌ stripe.customer.create_subscription]
+    
+    style Bad fill:#ff4444,stroke:#ff0000,stroke-width:2px,color:#fff
+    style LLM fill:#2d3748,stroke:#718096,stroke-width:2px,color:#fff
 ```
 
 The AI invents plausible-sounding APIs based on patterns in its training data. These hallucinations waste developer time and introduce bugs.
@@ -31,15 +32,17 @@ The AI invents plausible-sounding APIs based on patterns in its training data. T
 
 Jobel introduces a **Contract Authority** layer between documentation and code generation:
 
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│                                                                         │
-│  Documentation  →  Contract Compiler  →  Contract Registry  →  LLM     │
-│  (OpenAPI, MD)     (Extract & Verify)     (Verified APIs)     (Grounded)│
-│                                                                         │
-└─────────────────────────────────────────────────────────────────────────┘
-                                                     ↓
-                                          ✅ Only use verified methods!
+```mermaid
+flowchart LR
+    Docs[📄 Documentation<br/>OpenAPI, Markdown] --> Compiler[⚙️ Contract Compiler<br/>Extract & Verify]
+    Compiler --> Registry[(📋 Contract Registry<br/>Verified APIs)]
+    Registry --> LLM[🧠 LLM<br/>Grounded Generation]
+    LLM --> Output[✅ Verified Code<br/>Only uses real APIs]
+    
+    style Compiler fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Registry fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style LLM fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Output fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
 ```
 
 **The LLM can ONLY reference APIs that exist in the Contract Registry.**

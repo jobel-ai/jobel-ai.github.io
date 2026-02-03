@@ -12,17 +12,18 @@ Jobel's Knowledge Base is a **RAG (Retrieval-Augmented Generation)** system that
 
 ## How It Works
 
-```
-┌─────────────┐     ┌───────────────┐     ┌───────────────┐     ┌─────────────┐
-│  Documents  │ ──▶ │    Parser     │ ──▶ │   Embedder    │ ──▶ │  pgvector   │
-│  (Upload)   │     │  (Chunking)   │     │  (Vectorize)  │     │   (Index)   │
-└─────────────┘     └───────────────┘     └───────────────┘     └─────────────┘
-                                                                       │
-                                                                       ▼
-                                          ┌───────────────────────────────────┐
-                                          │        Semantic Search            │
-                                          │   Query → Similar Chunks → LLM    │
-                                          └───────────────────────────────────┘
+```mermaid
+flowchart LR
+    Upload[📁 Documents<br/>Upload] --> Parser[📝 Parser<br/>Chunking]
+    Parser --> Embedder[🧠 Embedder<br/>Vectorize]
+    Embedder --> PGVector[(💾 pgvector<br/>Index)]
+    PGVector --> Search[🔍 Semantic Search<br/>Query → Similar Chunks → LLM]
+    
+    style Upload fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Parser fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Embedder fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style PGVector fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Search fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -129,12 +130,21 @@ JINA_API_KEY=your_key        # Optional
 
 ### Provider Priority
 
-```
-1. Gemini (if GEMINI_API_KEY set)
-   ↓
-2. Jina AI (if JINA_API_KEY set)
-   ↓
-3. Local (always available)
+```mermaid
+flowchart TD
+    Start[Embedding Needed] --> Gemini{Gemini<br/>API Key?}
+    Gemini -->|Yes| UseGemini[Use Gemini]
+    Gemini -->|No| Jina{Jina AI<br/>API Key?}
+    Jina -->|Yes| UseJina[Use Jina AI]
+    Jina -->|No| UseLocal[Use Local]
+    
+    UseGemini --> Done[Embedding Generated]
+    UseJina --> Done
+    UseLocal --> Done
+    
+    style UseGemini fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
+    style UseJina fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#fff
+    style UseLocal fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
 ```
 
 ---

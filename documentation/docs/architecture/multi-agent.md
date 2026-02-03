@@ -23,16 +23,42 @@ Jobel solves this with **specialized agents** that focus on what they do best.
 
 ## The Agent Loop
 
-```
-    ┌─────────────────────────────────────────────────────────────┐
-    │                                                             │
-    ▼                                                             │
-┌─────────┐     ┌───────────┐     ┌──────────┐     ┌──────────┐  │
-│ PLANNER │ ──▶ │ RESEARCHER│ ──▶ │ EXECUTOR │ ──▶ │  CRITIC  │ ─┘
-└─────────┘     └───────────┘     └──────────┘     └──────────┘
-    │                                                   │
-    │  (Retry with feedback if validation fails)        │
-    └───────────────────────────────────────────────────┘
+```mermaid
+flowchart LR
+    User[👤 User Request] --> Planner
+    
+    subgraph AgentLoop["🔄 Agent Orchestration Loop"]
+        Planner[🎯 PLANNER<br/>Task Decomposition]
+        Researcher[🔍 RESEARCHER<br/>Knowledge Retrieval]
+        Executor[⚡ EXECUTOR<br/>Code Generation]
+        Critic[🔬 CRITIC<br/>Validation]
+        
+        Planner -->|Task Plan| Researcher
+        Researcher -->|Research Notes| Executor
+        Executor -->|Generated Code| Critic
+        Critic -->|✅ Passed| Output
+        Critic -->|❌ Issues Found| Executor
+    end
+    
+    Output[📦 Final Output] --> User
+    
+    subgraph DataSources["📚 Data Sources"]
+        Contracts[(API Contracts)]
+        Knowledge[(Knowledge Base)]
+        Security[(Security Patterns)]
+    end
+    
+    Researcher -.query.-> Knowledge
+    Researcher -.lookup.-> Contracts
+    Executor -.apply.-> Security
+    Critic -.validate.-> Contracts
+    
+    style Planner fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Researcher fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Executor fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Critic fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style AgentLoop fill:#1a1f2a,stroke:#5b8ff9,stroke-width:3px,color:#fff
+    style DataSources fill:#1a1f2a,stroke:#718096,stroke-width:2px,color:#fff
 ```
 
 ### Agent Responsibilities

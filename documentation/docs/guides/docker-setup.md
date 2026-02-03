@@ -12,17 +12,21 @@ Deploy Jobel with Docker Compose for production-ready infrastructure.
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                     Docker Network                          │
-│                                                             │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
-│  │  Frontend   │  │   Backend   │  │     PostgreSQL      │ │
-│  │  (Next.js)  │  │  (Express)  │  │  (pgvector)         │ │
-│  │  :3000      │  │  :4000      │  │  :5432              │ │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘ │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph DockerNetwork["🐳 Docker Network"]
+        Frontend[Frontend<br/>Next.js<br/>:3000]
+        Backend[Backend<br/>Express<br/>:4000]
+        DB[(PostgreSQL<br/>pgvector<br/>:5432)]
+        
+        Frontend -->|API Calls| Backend
+        Backend -->|SQL Queries| DB
+    end
+    
+    style Frontend fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style Backend fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style DB fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
+    style DockerNetwork fill:#0c0e12,stroke:#5b8ff9,stroke-width:3px,color:#fff
 ```
 
 ---
