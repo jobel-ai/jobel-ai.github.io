@@ -22,11 +22,6 @@ graph TB
         Frontend -->|API Calls| Backend
         Backend -->|SQL Queries| DB
     end
-    
-    style Frontend fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Backend fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style DB fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style DockerNetwork fill:#0c0e12,stroke:#5b8ff9,stroke-width:3px,color:#fff
 ```
 
 ---

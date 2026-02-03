@@ -19,9 +19,6 @@ flowchart LR
     User[User Request] --> LLM[LLM<br/>Training Data]
     LLM --> Code[Code Output]
     Code -.generates.-> Bad[❌ stripe.customer.create_subscription]
-    
-    style Bad fill:#ff4444,stroke:#ff0000,stroke-width:2px,color:#fff
-    style LLM fill:#2d3748,stroke:#718096,stroke-width:2px,color:#fff
 ```
 
 The AI invents plausible-sounding APIs based on patterns in its training data. These hallucinations waste developer time and introduce bugs.
@@ -38,11 +35,6 @@ flowchart LR
     Compiler --> Registry[(📋 Contract Registry<br/>Verified APIs)]
     Registry --> LLM[🧠 LLM<br/>Grounded Generation]
     LLM --> Output[✅ Verified Code<br/>Only uses real APIs]
-    
-    style Compiler fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Registry fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style LLM fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Output fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
 ```
 
 **The LLM can ONLY reference APIs that exist in the Contract Registry.**

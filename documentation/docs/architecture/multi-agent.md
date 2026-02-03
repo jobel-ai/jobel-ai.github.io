@@ -52,13 +52,6 @@ flowchart LR
     Researcher -.lookup.-> Contracts
     Executor -.apply.-> Security
     Critic -.validate.-> Contracts
-    
-    style Planner fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Researcher fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Executor fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Critic fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style AgentLoop fill:#1a1f2a,stroke:#5b8ff9,stroke-width:3px,color:#fff
-    style DataSources fill:#1a1f2a,stroke:#718096,stroke-width:2px,color:#fff
 ```
 
 ### Agent Responsibilities

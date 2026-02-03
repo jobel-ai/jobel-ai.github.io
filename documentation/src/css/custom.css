@@ -63,16 +63,17 @@
     font-weight: 600;
 }
 
-/* Code Blocks - Simple and Clean */
+/* Code Blocks - Better Contrast */
 .prism-code {
-    background-color: #161b22 !important;
+    background-color: #1c2128 !important;
     border: 1px solid #30363d !important;
     border-radius: 6px;
     font-size: 14px;
+    padding: 1rem !important;
 }
 
 code {
-    background: #161b22;
+    background: #1c2128;
     border: 1px solid #30363d;
     color: #79c0ff;
     padding: 0.2em 0.4em;
@@ -80,9 +81,10 @@ code {
     font-size: 85%;
 }
 
-/* Simple Syntax Highlighting - Replit Style */
+/* Simple Syntax Highlighting - High Contrast */
 [data-theme='dark'] .token.comment {
     color: #8b949e;
+    font-style: italic;
 }
 
 [data-theme='dark'] .token.string {
@@ -107,7 +109,7 @@ code {
     color: #c9d1d9;
 }
 
-/* Mermaid Diagrams - Clean Styling */
+/* Mermaid Diagrams - Light Theme for Maximum Visibility */
 .mermaid {
     background: transparent !important;
 }
@@ -117,28 +119,49 @@ code {
     height: auto;
 }
 
-/* Override Mermaid default colors for clean look */
+/* Mermaid - Light backgrounds with dark text/arrows */
 .mermaid .node rect,
 .mermaid .node circle,
 .mermaid .node polygon {
-    fill: #1a1d24 !important;
-    stroke: #30363d !important;
-    stroke-width: 1px !important;
+    fill: #f6f8fa !important;
+    stroke: #1f2937 !important;
+    stroke-width: 2px !important;
 }
 
 .mermaid .node .label {
-    color: #c9d1d9 !important;
-    fill: #c9d1d9 !important;
+    color: #1f2937 !important;
+    fill: #1f2937 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
 }
 
 .mermaid .edgePath .path {
-    stroke: #30363d !important;
-    stroke-width: 1.5px !important;
+    stroke: #1f2937 !important;
+    stroke-width: 2px !important;
 }
 
 .mermaid .edgeLabel {
-    background-color: #0e1117 !important;
-    color: #8b949e !important;
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    padding: 4px 8px !important;
+    border: 1px solid #d1d5db !important;
+}
+
+.mermaid .cluster rect {
+    fill: #ffffff !important;
+    stroke: #1f2937 !important;
+    stroke-width: 2px !important;
+}
+
+.mermaid .cluster .label {
+    color: #1f2937 !important;
+    fill: #1f2937 !important;
+    font-weight: 600 !important;
+}
+
+.mermaid .arrowheadPath {
+    fill: #1f2937 !important;
+    stroke: #1f2937 !important;
 }
 
 /* Tables */

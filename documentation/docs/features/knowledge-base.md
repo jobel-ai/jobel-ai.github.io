@@ -18,12 +18,6 @@ flowchart LR
     Parser --> Embedder[🧠 Embedder<br/>Vectorize]
     Embedder --> PGVector[(💾 pgvector<br/>Index)]
     PGVector --> Search[🔍 Semantic Search<br/>Query → Similar Chunks → LLM]
-    
-    style Upload fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Parser fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Embedder fill:#2d3748,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style PGVector fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Search fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -141,10 +135,6 @@ flowchart TD
     UseGemini --> Done[Embedding Generated]
     UseJina --> Done
     UseLocal --> Done
-    
-    style UseGemini fill:#22c55e,stroke:#16a34a,stroke-width:2px,color:#fff
-    style UseJina fill:#3b82f6,stroke:#2563eb,stroke-width:2px,color:#fff
-    style UseLocal fill:#f59e0b,stroke:#d97706,stroke-width:2px,color:#fff
 ```
 
 ---
