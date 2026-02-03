@@ -38,8 +38,14 @@
     --ifm-navbar-background-color: rgba(12, 12, 14, 0.9);
     --ifm-footer-background-color: #0c0c0e;
 
-    --ifm-color-content: #e4e4e7;
+    --ifm-color-content: #ffffff;
+    --ifm-font-color-base: #ffffff;
     --ifm-heading-color: #ffffff;
+
+    --ifm-color-emphasis-0: #ffffff;
+    --ifm-color-emphasis-100: #f4f4f5;
+    --ifm-color-emphasis-200: #e4e4e7;
+    --ifm-color-emphasis-300: #d1d1d6;
 
     /* Brand Accent Glow */
     --jobel-glow: 0 0 30px rgba(0, 255, 136, 0.1);
@@ -112,24 +118,36 @@ body {
    MARKDOWN & CONTENT
    ============================================ */
 
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+    color: #ffffff !important;
+    letter-spacing: -0.02em;
+}
+
 .markdown h1 {
     font-size: 2.75rem;
     font-weight: 800;
     letter-spacing: -0.04em;
     margin-bottom: 2rem;
-    color: #fff;
 }
 
 .markdown h2 {
     font-size: 1.5rem;
     font-weight: 600;
-    letter-spacing: -0.02em;
     margin-top: 3.5rem;
     border: none;
-    color: #f4f4f5;
 }
 
-.markdown p {
+.markdown p,
+.markdown li,
+.markdown td,
+.markdown th,
+.markdown span {
+    color: #ffffff !important;
     line-height: 1.7;
     margin-bottom: 1.5rem;
 }
@@ -143,7 +161,8 @@ body {
     font-size: 0.9rem;
     border-radius: 6px;
     margin: 2px 0;
-    color: #a1a1aa !important;
+    color: #ffffff !important;
+    opacity: 0.9;
 }
 
 .menu__link:hover {
