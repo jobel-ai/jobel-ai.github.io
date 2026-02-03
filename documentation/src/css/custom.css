@@ -1,98 +1,59 @@
 /**
- * Jobel Documentation - Professional Dark Theme
- * Readable, clean color scheme
+ * Jobel Documentation - Clean Professional Theme
+ * Simple, readable, Replit-inspired
  */
 
 :root {
-    --ifm-color-primary: #5b8ff9;
-    --ifm-color-primary-dark: #4a7ce0;
-    --ifm-color-primary-darker: #3969c7;
-    --ifm-color-primary-darkest: #2856ae;
-    --ifm-color-primary-light: #6ca2ff;
-    --ifm-color-primary-lighter: #7db5ff;
-    --ifm-color-primary-lightest: #8ec8ff;
+    --ifm-color-primary: #0099ff;
+    --ifm-color-primary-dark: #0088ee;
+    --ifm-color-primary-darker: #0077dd;
+    --ifm-color-primary-darkest: #0066cc;
+    --ifm-color-primary-light: #33aaff;
+    --ifm-color-primary-lighter: #66bbff;
+    --ifm-color-primary-lightest: #99ccff;
 
-    --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --ifm-heading-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', Monaco, Consolas, monospace;
+    --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --ifm-font-family-monospace: 'Monaco', 'Courier New', monospace;
 
     --ifm-navbar-height: 3.5rem;
 }
 
-/* Dark Theme - Professional Colors */
+/* Dark Theme */
 [data-theme='dark'] {
-    /* Backgrounds */
-    --ifm-background-color: #1b1b1d;
-    --ifm-background-surface-color: #242526;
-    --ifm-navbar-background-color: #1b1b1d;
-    --ifm-footer-background-color: #1b1b1d;
+    --ifm-background-color: #0e1117;
+    --ifm-background-surface-color: #1a1d24;
+    --ifm-navbar-background-color: #0e1117;
+    --ifm-footer-background-color: #0e1117;
 
-    /* Text Colors */
-    --ifm-font-color-base: #e3e3e3;
-    --ifm-color-content: #b4b4b4;
-    --ifm-color-content-secondary: #909090;
-    --ifm-heading-color: #ffffff;
+    --ifm-font-color-base: #c9d1d9;
+    --ifm-color-content: #c9d1d9;
+    --ifm-heading-color: #f0f6fc;
 
-    /* Borders */
-    --ifm-toc-border-color: rgba(255, 255, 255, 0.1);
-    --ifm-table-border-color: rgba(255, 255, 255, 0.1);
+    --ifm-toc-border-color: #30363d;
 }
-
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* Navbar */
 .navbar {
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #30363d;
 }
 
 .navbar__title {
-    font-weight: 700;
-}
-
-.navbar__item {
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-/* Markdown Headings */
-.markdown h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-}
-
-.markdown h2 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin-top: 2.5rem;
-    padding-bottom: 0.3rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.markdown h3 {
-    font-size: 1.35rem;
     font-weight: 600;
-    margin-top: 2rem;
 }
 
-/* Body Text */
+/* Markdown Content */
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+    font-weight: 600;
+}
+
 .markdown p,
 .markdown li {
-    line-height: 1.7;
+    line-height: 1.6;
 }
 
-.markdown a {
-    text-decoration: none;
-}
-
-.markdown a:hover {
-    text-decoration: underline;
-}
-
-/* Sidebar Menu */
+/* Sidebar */
 .menu__link {
     font-size: 0.875rem;
     border-radius: 6px;
@@ -102,89 +63,92 @@
     font-weight: 600;
 }
 
-/* Code Blocks */
+/* Code Blocks - Simple and Clean */
 .prism-code {
-    background-color: #2d2d2d !important;
-    border-radius: 8px;
-}
-
-pre code {
-    background: transparent;
+    background-color: #161b22 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 6px;
+    font-size: 14px;
 }
 
 code {
-    background: rgba(135, 131, 120, 0.15);
-    color: #eb5757;
+    background: #161b22;
+    border: 1px solid #30363d;
+    color: #79c0ff;
     padding: 0.2em 0.4em;
     border-radius: 3px;
     font-size: 85%;
 }
 
-/* Syntax Highlighting for Code Blocks */
-[data-theme='dark'] .token.comment,
-[data-theme='dark'] .token.prolog,
-[data-theme='dark'] .token.doctype,
-[data-theme='dark'] .token.cdata {
-    color: #6a9955;
+/* Simple Syntax Highlighting - Replit Style */
+[data-theme='dark'] .token.comment {
+    color: #8b949e;
 }
 
-[data-theme='dark'] .token.punctuation {
-    color: #d4d4d4;
+[data-theme='dark'] .token.string {
+    color: #a5d6ff;
 }
 
-[data-theme='dark'] .token.property,
-[data-theme='dark'] .token.tag,
-[data-theme='dark'] .token.boolean,
+[data-theme='dark'] .token.keyword {
+    color: #ff7b72;
+}
+
+[data-theme='dark'] .token.function {
+    color: #d2a8ff;
+}
+
 [data-theme='dark'] .token.number,
-[data-theme='dark'] .token.constant,
-[data-theme='dark'] .token.symbol,
-[data-theme='dark'] .token.deleted {
-    color: #b5cea8;
-}
-
-[data-theme='dark'] .token.selector,
-[data-theme='dark'] .token.attr-name,
-[data-theme='dark'] .token.string,
-[data-theme='dark'] .token.char,
-[data-theme='dark'] .token.builtin,
-[data-theme='dark'] .token.inserted {
-    color: #ce9178;
+[data-theme='dark'] .token.boolean {
+    color: #79c0ff;
 }
 
 [data-theme='dark'] .token.operator,
-[data-theme='dark'] .token.entity,
-[data-theme='dark'] .token.url,
-[data-theme='dark'] .language-css .token.string,
-[data-theme='dark'] .style .token.string {
-    color: #d4d4d4;
+[data-theme='dark'] .token.punctuation {
+    color: #c9d1d9;
 }
 
-[data-theme='dark'] .token.atrule,
-[data-theme='dark'] .token.attr-value,
-[data-theme='dark'] .token.keyword {
-    color: #c586c0;
+/* Mermaid Diagrams - Clean Styling */
+.mermaid {
+    background: transparent !important;
 }
 
-[data-theme='dark'] .token.function,
-[data-theme='dark'] .token.class-name {
-    color: #dcdcaa;
+.mermaid svg {
+    max-width: 100%;
+    height: auto;
 }
 
-[data-theme='dark'] .token.regex,
-[data-theme='dark'] .token.important,
-[data-theme='dark'] .token.variable {
-    color: #d16969;
+/* Override Mermaid default colors for clean look */
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node polygon {
+    fill: #1a1d24 !important;
+    stroke: #30363d !important;
+    stroke-width: 1px !important;
+}
+
+.mermaid .node .label {
+    color: #c9d1d9 !important;
+    fill: #c9d1d9 !important;
+}
+
+.mermaid .edgePath .path {
+    stroke: #30363d !important;
+    stroke-width: 1.5px !important;
+}
+
+.mermaid .edgeLabel {
+    background-color: #0e1117 !important;
+    color: #8b949e !important;
 }
 
 /* Tables */
 .markdown table {
     border-collapse: collapse;
-    width: 100%;
 }
 
 .markdown th,
 .markdown td {
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #30363d;
     padding: 0.75rem;
 }
 
@@ -195,20 +159,10 @@ code {
 }
 
 .button--primary {
-    background: var(--ifm-color-primary);
-    border: 1px solid var(--ifm-color-primary);
+    background: #0099ff;
+    border: 1px solid #0099ff;
 }
 
 .button--primary:hover {
-    background: var(--ifm-color-primary-dark);
-    border-color: var(--ifm-color-primary-dark);
-}
-
-.button--secondary {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.button--secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: #0088ee;
 }

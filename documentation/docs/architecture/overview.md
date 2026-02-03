@@ -68,13 +68,6 @@ graph TB
     Contract --> Contracts
     Knowledge --> Docs
     Knowledge --> Embeddings
-    
-    style Frontend fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Backend fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
-    style Intelligence fill:#242526,stroke:#5b8ff9,stroke-width:1px,color:#fff
-    style Services fill:#242526,stroke:#5b8ff9,stroke-width:1px,color:#fff
-    style LLMLayer fill:#242526,stroke:#5b8ff9,stroke-width:1px,color:#fff
-    style DataLayer fill:#1a1f2a,stroke:#5b8ff9,stroke-width:2px,color:#fff
 ```
 
 ---
