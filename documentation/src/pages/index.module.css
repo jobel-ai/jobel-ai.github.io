@@ -31,7 +31,7 @@
     font-size: 0.75rem;
     font-weight: 600;
     margin-bottom: 2.5rem;
-    color: #a1a1aa;
+    color: #e4e4e7;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     position: relative;
@@ -59,7 +59,7 @@
     max-width: 600px;
     margin: 0 auto 3rem;
     line-height: 1.6;
-    color: #71717a;
+    color: #a1a1aa;
     position: relative;
     z-index: 10;
 }
@@ -110,7 +110,7 @@
 .statLabel {
     font-size: 0.8rem;
     font-weight: 600;
-    color: #71717a;
+    color: #a1a1aa;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -159,7 +159,7 @@
 .featureDescription {
     font-size: 0.9rem;
     line-height: 1.6;
-    color: #71717a;
+    color: #a1a1aa;
 }
 
 /* ============================================

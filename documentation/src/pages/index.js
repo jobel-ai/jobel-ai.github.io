@@ -44,7 +44,7 @@ const stats = [
     { value: '0%', label: 'Hallucination Rate' },
     { value: '50+', label: 'Security Rules' },
     { value: '100ms', label: 'Average Latency' },
-    { value: 'YC-2025', label: 'Foundation' },
+    { value: '2025', label: 'Foundation' },
 ];
 
 function HomepageHeader() {

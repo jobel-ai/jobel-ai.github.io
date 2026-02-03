@@ -33,12 +33,12 @@
 
 /* Dark Theme Only - Enterprise Choice */
 [data-theme='dark'] {
-    --ifm-background-color: #050505;
-    --ifm-background-surface-color: #0f0f0f;
-    --ifm-navbar-background-color: rgba(5, 5, 5, 0.8);
-    --ifm-footer-background-color: #050505;
+    --ifm-background-color: #0c0c0e;
+    --ifm-background-surface-color: #141416;
+    --ifm-navbar-background-color: rgba(12, 12, 14, 0.9);
+    --ifm-footer-background-color: #0c0c0e;
 
-    --ifm-color-content: #a1a1aa;
+    --ifm-color-content: #e4e4e7;
     --ifm-heading-color: #ffffff;
 
     /* Brand Accent Glow */
@@ -143,7 +143,7 @@ body {
     font-size: 0.9rem;
     border-radius: 6px;
     margin: 2px 0;
-    color: #71717a !important;
+    color: #a1a1aa !important;
 }
 
 .menu__link:hover {
